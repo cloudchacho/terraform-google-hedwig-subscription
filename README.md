@@ -12,12 +12,12 @@ creates infra for Hedwig consumer app.
 
 ```hcl
 module "topic-dev-user-updated-v1" {
-  source = "standard-ai/hedwig-topic/google"
+  source = "cloudchacho/hedwig-topic/google"
   topic  = "dev-user-updated-v1"
 }
 
 module "sub-dev-myapp-dev-user-updated" {
-  source = "standard-ai/hedwig-subscription/google"
+  source = "cloudchacho/hedwig-subscription/google"
   topic  = "${module.topic-dev-user-updated-v1.name}"
   name   = "dev-myapp"
 }
@@ -36,9 +36,9 @@ The Google subscription name will be prefixed by `hedwig-`.
 
 ## Release Notes
 
-[Github Releases](https://github.com/standard-ai/terraform-google-hedwig-subscription/releases)
+[Github Releases](https://github.com/cloudchacho/terraform-google-hedwig-subscription/releases)
 
 ## How to publish
 
-Go to [Terraform Registry](https://registry.terraform.io/modules/standard-ai/hedwig-subscription/google), and 
+Go to [Terraform Registry](https://registry.terraform.io/modules/cloudchacho/hedwig-subscription/google), and 
 Resync module.
