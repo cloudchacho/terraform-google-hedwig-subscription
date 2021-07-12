@@ -33,7 +33,7 @@ resource "google_pubsub_subscription" "subscription" {
 data "google_iam_policy" "subscription_policy" {
   binding {
     members = concat(
-      var.iam_service_account == "" ? [] :
+      var.iam_service_account == "" || var.iam_service_account == null ? [] :
       ["serviceAccount:${var.iam_service_account}"],
       ["serviceAccount:service-${data.google_project.current.number}@gcp-sa-pubsub.iam.gserviceaccount.com"]
     )
@@ -42,7 +42,7 @@ data "google_iam_policy" "subscription_policy" {
 
   binding {
     members = concat(
-      var.iam_service_account == "" ? [] :
+      var.iam_service_account == "" || var.iam_service_account == null ? [] :
       ["serviceAccount:${var.iam_service_account}"],
       ["serviceAccount:service-${data.google_project.current.number}@gcp-sa-pubsub.iam.gserviceaccount.com"]
     )
