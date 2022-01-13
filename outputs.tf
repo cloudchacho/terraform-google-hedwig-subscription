@@ -1,5 +1,5 @@
 output "subscription_path" {
-  value       = google_pubsub_subscription.subscription.path
+  value       = google_pubsub_subscription.subscription.id
   description = "Path of the Subscription"
 }
 
