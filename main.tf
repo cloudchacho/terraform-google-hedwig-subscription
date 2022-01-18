@@ -24,9 +24,12 @@ resource "google_pubsub_subscription" "subscription" {
     ttl = ""
   }
 
-  dead_letter_policy {
-    dead_letter_topic     = "projects/${data.google_project.current.project_id}/topics/hedwig-${var.queue}-dlq"
-    max_delivery_attempts = 5
+  dynamic "dead_letter_policy" {
+    for_each = var.disable_dlq ? [] : [1]
+    content {
+      dead_letter_topic     = "projects/${data.google_project.current.project_id}/topics/hedwig-${var.queue}-dlq"
+      max_delivery_attempts = 5
+    }
   }
 }
 

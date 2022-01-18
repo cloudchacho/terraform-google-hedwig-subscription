@@ -20,3 +20,8 @@ variable "enable_message_ordering" {
   description = "Order messages by orderingKey or publish time"
   default     = false
 }
+
+variable "disable_dlq" {
+  description = "Don't configure dlq policy. This is useful for firehose subscription using dataflow."
+  default     = false
+}
