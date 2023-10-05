@@ -17,6 +17,7 @@ resource "google_pubsub_subscription" "subscription" {
   ack_deadline_seconds = 20
 
   enable_message_ordering = var.enable_message_ordering
+  filter = var.filter
 
   labels = var.labels
 
@@ -28,7 +29,15 @@ resource "google_pubsub_subscription" "subscription" {
     for_each = var.disable_dlq ? [] : [1]
     content {
       dead_letter_topic     = "projects/${data.google_project.current.project_id}/topics/hedwig-${var.queue}-dlq"
-      max_delivery_attempts = 5
+      max_delivery_attempts = var.max_delivery_attempts
+    }
+  }
+
+  dynamic "retry_policy" {
+    for_each = var.retry_policy == null ? [] : [1]
+    content {
+      minimum_backoff = var.retry_policy["minimum_backoff"]
+      maximum_backoff = var.retry_policy["maximum_backoff"]
     }
   }
 }

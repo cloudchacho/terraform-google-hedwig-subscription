@@ -25,3 +25,22 @@ variable "disable_dlq" {
   description = "Don't configure dlq policy. This is useful for firehose subscription using dataflow."
   default     = false
 }
+
+variable "filter" {
+  description = ") The subscription only delivers the messages that match the filter. Pub/Sub automatically acknowledges the messages that don't match the filter. You can filter messages by their attributes. The maximum length of a filter is 256 bytes. After creating the subscription, you can't modify the filter."
+  default = ""
+}
+
+variable "max_delivery_attempts" {
+  description = "The maximum number of delivery attempts for any message. The value must be between 5 and 100. The number of delivery attempts is defined as 1 + (the sum of number of NACKs and number of times the acknowledgement deadline has been exceeded for the message). A NACK is any call to ModifyAckDeadline with a 0 deadline. Note that client libraries may automatically extend ack_deadlines. This field will be honored on a best effort basis."
+  default = 5
+}
+
+variable "retry_policy" {
+  description = "A policy that specifies how Pub/Sub retries message delivery for this subscription. If not set, the default retry policy is applied. This generally implies that messages will be retried as soon as possible for healthy subscribers. RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded events for a given message"
+  type = object({
+    minimum_backoff = number
+    maximum_backoff = number
+  })
+  default = null
+}
