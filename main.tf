@@ -17,7 +17,7 @@ resource "google_pubsub_subscription" "subscription" {
   ack_deadline_seconds = 20
 
   enable_message_ordering = var.enable_message_ordering
-  filter = var.filter
+  filter                  = var.filter
 
   labels = var.labels
 
