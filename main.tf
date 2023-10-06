@@ -40,6 +40,8 @@ resource "google_pubsub_subscription" "subscription" {
       maximum_backoff = var.retry_policy["maximum_backoff"]
     }
   }
+
+  retain_acked_messages = var.retain_acked_messages
 }
 
 data "google_iam_policy" "subscription_policy" {
