@@ -51,3 +51,8 @@ variable "retain_acked_messages" {
   description = "Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription's backlog, even if they are acknowledged, until they fall out of the messageRetentionDuration window."
   default     = false
 }
+
+variable "ack_deadline_seconds" {
+  description = "The ack deadline in seconds for the subscription."
+  default     = 20
+}
