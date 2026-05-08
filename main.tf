@@ -14,7 +14,7 @@ resource "google_pubsub_subscription" "subscription" {
   name  = local.subscription_name
   topic = var.topic
 
-  ack_deadline_seconds = 20
+  ack_deadline_seconds = var.ack_deadline_seconds
 
   enable_message_ordering = var.enable_message_ordering
   filter                  = var.filter
